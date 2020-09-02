@@ -3,6 +3,7 @@ kind: ConfigMap
 metadata:
   name: db-config
 data:
-  MYSQL_DATABASE: <<MYSQL_DATABASE>>
-  MYSQL_USER: <<MYSQL_USER>>
-  MYSQL_PASSWORD: <<MYSQL_PASSWORD
+  HOST: "mysql-service"
+  DATABASE: "<<MYSQL_DATABASE>>"
+  USERNAME: "<<MYSQL_USER>>"
+  PASSWORD: "<<MYSQL_PASSWORD>>"

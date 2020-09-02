@@ -15,9 +15,10 @@ spec:
         App: nodeapp
     spec:
       containers:
-        - name: nodeapp
+      - name: nodeapp
         image: muhammadalsaied/voda-nodeapp
         ports:
         - containerPort: 3000
+        envFrom:
         - configMapRef: 
-          name: db-config
+            name: db-config
