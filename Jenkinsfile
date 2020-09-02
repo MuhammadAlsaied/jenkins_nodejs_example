@@ -1,9 +1,4 @@
 pipeline {
-    environment {
-    registry = 'muhammadalsaied/voda-nodeapp'
-    registryCredential = 'dockerhub'
-    dockerImage = ''
-    }
     agent any
     stages {
         stage('Building image') {
