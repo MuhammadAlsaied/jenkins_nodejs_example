@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodeapp-deployment
+  labels:
+    App: nodeapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      App: nodeapp
+  template:
+    metadata:
+      labels:
+        App: nodeapp
+    spec:
+      containers:
+        - name: nodeapp
+        image: muhammadalsaied/voda-nodeapp
+        ports:
+        - containerPort: 3000
+        - configMapRef: 
+          name: db-config
