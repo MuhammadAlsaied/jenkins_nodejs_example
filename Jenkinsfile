@@ -10,6 +10,7 @@ pipeline {
                         sh "sed -i 's/<<MYSQL_DATABASE>>/test_db/g' db-configmap.yaml"
                         sh "sed -i 's/<<MYSQL_USER>>/$USER/g' db-configmap.yaml"
                         sh "sed -i 's/<<MYSQL_PASSWORD>>/$PASS/g' db-configmap.yaml"
+                        sh "sed -i 's/<<BUILD_NUMBER>>/$BUILD_NUMBER/g' app-deployment.yaml"
                     }
                 }
             }
@@ -18,7 +19,7 @@ pipeline {
             steps {
                 dir('k8s_files') {
                     sh "kubectl apply -n ${params.env} -f ."
-                    }
+                }
                 cleanWs()
             }
         }

@@ -23,3 +23,6 @@ spec:
         envFrom:
         - configMapRef: 
             name: db-config
+        env:
+        - name: "BUILD_NUMBER"
+          value: "<<BUILD_NUMBER>>"
