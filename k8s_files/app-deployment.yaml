@@ -17,6 +17,7 @@ spec:
       containers:
       - name: nodeapp
         image: muhammadalsaied/voda-nodeapp
+        imagePullPolicy: Always
         ports:
         - containerPort: 3000
         envFrom:
