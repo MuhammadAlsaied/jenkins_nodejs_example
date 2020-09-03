@@ -17,9 +17,7 @@ pipeline {
         }
         stage('Deploying App') {
             steps {
-                dir('k8s_files') {
-                    sh "kubectl apply -n ${params.env} -f ."
-                }
+                sh "ansible-playbook playbook.yaml --extra-vars 'namespace=${params.env}'"
                 cleanWs()
             }
         }

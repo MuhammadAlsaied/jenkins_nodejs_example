@@ -1,0 +1,8 @@
+---
+- hosts: localhost
+  connection: local
+  vars:
+    namespace: dev
+  tasks:
+    - name: deploy app using kubectl
+      shell: kubectl apply -n {{namespace}} -f ./k8s_files/
