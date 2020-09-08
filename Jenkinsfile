@@ -9,6 +9,7 @@ pipeline {
                         sh "sed -i 's/<<MYSQL_DATABASE>>/test_db/g' db-configmap.yaml"
                         sh "sed -i 's/<<MYSQL_USER>>/$USER/g' db-configmap.yaml"
                         sh "sed -i 's/<<MYSQL_PASSWORD>>/$PASS/g' db-configmap.yaml"
+                        sh "sed -i 's/<<NEXUS_HOST>>/$env.private_nexus/g' app-deployment.yaml"
                         sh "sed -i 's/<<BUILD_NUMBER>>/$BUILD_NUMBER/g' app-deployment.yaml"
                     }
                 }
@@ -16,7 +17,11 @@ pipeline {
         }
         stage('Deploying App') {
             steps {
-                sh "ansible-playbook playbook.yaml --extra-vars 'namespace=${params.env}'"
+                withCredentials([usernamePassword(credentialsId:"nexus",usernameVariable:"USERNAME",passwordVariable:"PASSWORD")]){
+                    sh "docker login ${env.private_nexus} --username $USERNAME --password $PASSWORD"
+                    sh "docker pull  ${env.private_nexus}/voda-nodeapp"
+                    sh "ansible-playbook playbook.yaml --extra-vars 'namespace=${params.env}'"
+                }
                 cleanWs()
             }
         }
