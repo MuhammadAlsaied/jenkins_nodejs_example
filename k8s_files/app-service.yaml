@@ -5,9 +5,9 @@ metadata:
   labels:
     App: nodeapp
 spec:
-    type: NodePort
+    type: LoadBalancer
     ports:
-    - port: 3000
-      nodePort: <<nodePort>>
+    - port: 80
+      targetPort: 3000
     selector:
       App: nodeapp

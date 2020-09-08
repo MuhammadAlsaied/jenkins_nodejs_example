@@ -6,7 +6,6 @@ pipeline {
             steps {
                 dir('k8s_files') {
                     withCredentials([usernamePassword(credentialsId:'mysql', usernameVariable:'USER', passwordVariable:'PASS')]) {
-                        sh "sed -i 's/<<nodePort>>/${startPort}/g' app-service.yaml"
                         sh "sed -i 's/<<MYSQL_DATABASE>>/test_db/g' db-configmap.yaml"
                         sh "sed -i 's/<<MYSQL_USER>>/$USER/g' db-configmap.yaml"
                         sh "sed -i 's/<<MYSQL_PASSWORD>>/$PASS/g' db-configmap.yaml"
